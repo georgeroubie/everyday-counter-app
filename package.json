@@ -1,6 +1,6 @@
 {
-  "name": "react-boilerplate",
-  "version": "6.0.2",
+  "name": "everyday-counter",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

@@ -1,7 +1,7 @@
 {
-  "version": "6.0.2",
-  "short_name": "Web app short name",
-  "name": "Web app full name",
+  "version": "1.0.0",
+  "short_name": "Everyday counter",
+  "name": "Everyday counter",
   "icons": [
     {
       "src": "favicon.ico",
