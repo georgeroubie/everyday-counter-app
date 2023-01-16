@@ -7,6 +7,11 @@ function appReducer(state, { type, value }) {
         ...state,
         theme: value,
       };
+    case actionTypes.ADD_NEW_COUNTER:
+      return {
+        ...state,
+        list: [...state.list, value],
+      };
     default:
       return state;
   }
