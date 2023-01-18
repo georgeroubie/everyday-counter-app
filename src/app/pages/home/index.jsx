@@ -1,4 +1,4 @@
-import CounterList from '../../components/counter-list/CounterList';
+import CounterList from '../../components/counter-list';
 import PageWrapper from '../../components/layout/PageWrapper';
 
 const Home = () => {
