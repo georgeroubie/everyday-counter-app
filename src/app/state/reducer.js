@@ -12,6 +12,11 @@ function appReducer(state, { type, value }) {
         ...state,
         list: [...state.list, value],
       };
+    case actionTypes.UPDATE_COUNTERS:
+      return {
+        ...state,
+        list: [...value],
+      };
     default:
       return state;
   }
