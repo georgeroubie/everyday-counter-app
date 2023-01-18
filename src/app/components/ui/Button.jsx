@@ -18,34 +18,12 @@ const Wrapper = styled.button`
   padding: ${({ theme: { spacing } }) => spacing.normal};
   border-radius: ${({ theme: { shapes } }) => shapes.rounded};
   width: 100%;
-  min-width: 0;
-  border: 0;
-  user-select: none;
   color: ${({ theme: { colors } }) => colors.buttonPrimaryText};
   background-color: ${({ theme: { colors } }) => colors.buttonPrimary};
   ${setTransition('color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out')}
 
   &:hover {
-    text-decoration: none;
     background-color: ${({ theme: { colors } }) => darken(colors.buttonPrimary, 10)};
-  }
-
-  &:focus,
-  &:active {
-    outline: 0;
-    box-shadow: ${({ theme: { spacing, colors } }) => `0 0 0 ${spacing.xsmall} ${colors.outline}`};
-    text-decoration: none;
-  }
-
-  &.disabled,
-  &:disabled {
-    opacity: 0.65;
-    box-shadow: none;
-    text-decoration: none;
-  }
-
-  &:not(:disabled) {
-    cursor: pointer;
   }
 
   ${({ $size }) =>
