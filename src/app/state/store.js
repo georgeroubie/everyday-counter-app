@@ -8,8 +8,14 @@ function useAppState() {
     theme: getCurrentTheme(),
     list: [
       {
-        id: 0,
+        id: `0`,
         name: 'Cigarets',
+        value: 0,
+      },
+      {
+        id: `1`,
+        name: 'Coke',
+        value: 0,
       },
     ],
   });
@@ -27,10 +33,15 @@ function useAppState() {
     setState(actionTypes.ADD_NEW_COUNTER, value);
   }
 
+  function updateCounters(value) {
+    setState(actionTypes.UPDATE_COUNTERS, value);
+  }
+
   return {
     state,
     setTheme,
     addNewCounter,
+    updateCounters,
   };
 }
 
