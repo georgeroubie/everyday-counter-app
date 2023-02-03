@@ -56,6 +56,14 @@ const InputWrapper = styled.div`
     $state === 'success' &&
     css`
       background-color: ${({ theme: { colors } }) => colors.successSecondary};
+
+      ${InputLabel} {
+        color: ${({ theme: { colors } }) => colors.successPrimary};
+      }
+
+      ${BaseInput} {
+        color: ${({ theme: { colors } }) => colors.successPrimary};
+      }
     `};
 
   ${({ $state }) =>
@@ -64,26 +72,24 @@ const InputWrapper = styled.div`
       background-color: ${({ theme: { colors } }) => colors.errorSecondary};
 
       ${InputLabel} {
-        color: ${({ theme: { colors } }) => colors.primary};
+        color: ${({ theme: { colors } }) => colors.errorPrimary};
       }
 
-      ${BaseInput}::placeholder {
-        color: ${({ theme: { colors } }) => colors.primary};
+      ${BaseInput} {
+        color: ${({ theme: { colors } }) => colors.errorPrimary};
       }
     `};
 
-  ${({ $disabled }) => {
-    if ($disabled) {
-      return css`
-        border-color: ${({ theme: { colors } }) => colors.borderPrimary};
-        background-color: ${({ theme: { colors } }) => colors.textDisabled} !important;
+  ${({ $disabled }) =>
+    $disabled &&
+    css`
+      border-color: ${({ theme: { colors } }) => colors.borderPrimary};
+      background-color: ${({ theme: { colors } }) => colors.textDisabled} !important;
 
-        input {
-          background-image: none;
-        }
-      `;
-    }
-  }}
+      input {
+        background-image: none;
+      }
+    `}
 `;
 
 const InputContainer = styled.div`
