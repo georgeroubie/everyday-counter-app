@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   padding: ${({ theme: { spacing } }) => `${spacing.normal} ${spacing.large}`};
   margin-bottom: ${({ theme: { spacing } }) => spacing.large};
   border: ${({ theme: { colors, shapes } }) => `${shapes.divider} solid ${colors.borderPrimary}`};
+  user-select: none;
 `;
 
 const Text = styled.span`
