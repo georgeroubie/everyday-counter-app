@@ -2,14 +2,18 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PageWrapper from '../../components/layout/PageWrapper';
+import Description from '../../components/typography/Description';
 import Title from '../../components/typography/Title';
 import _Button from '../../components/ui/Button';
-import Input from '../../components/ui/Input';
+import _Input from '../../components/ui/Input';
 import { AppContext } from '../../state/Context';
+
+const Input = styled(_Input)`
+  margin-bottom: ${({ theme: { spacing } }) => spacing.large};
+`;
 
 const ButtonWrapper = styled.div`
   display: flex;
-  margin-top: ${({ theme: { spacing } }) => spacing.large};
   gap: ${({ theme: { spacing } }) => spacing.large};
 `;
 
@@ -21,19 +25,34 @@ const AddNewCounter = () => {
   const navigate = useNavigate();
   const { addNewCounter } = useContext(AppContext);
   const [name, setName] = useState('');
+  const [goal, setGoal] = useState();
 
   function goToHome() {
     navigate('/');
   }
 
-  function handleOnChange({ target }) {
+  function onNameChange({ target }) {
     setName(target.value);
+  }
+
+  function onGoalChange({ target }) {
+    const { value } = target;
+
+    if (!value) {
+      setGoal();
+      return;
+    }
+
+    if (value.match(/^-?\d+$/) && value < 100000000) {
+      setGoal(Math.abs(target.value));
+    }
   }
 
   function save() {
     addNewCounter({
       id: `${new Date().valueOf()}`,
       name,
+      goal,
       value: 0,
     });
     goToHome();
@@ -41,8 +60,14 @@ const AddNewCounter = () => {
 
   return (
     <PageWrapper>
-      <Title>Add new counter</Title>
-      <Input label="Counter name" value={name} onChange={handleOnChange} />
+      <Title>Add a new counter</Title>
+      <Description>
+        You can use something friendly for the counter name and add emojis, e.g.: Bottles of water 💦.
+      </Description>
+
+      <Input label="Counter name" value={name} onChange={onNameChange} />
+      <Description>Optionally add a goal to keep you motivated.</Description>
+      <Input label="Counter goal" inputMode="numeric" value={goal} onChange={onGoalChange} />
       <ButtonWrapper>
         <Button variation="secondary" size="large" onClick={goToHome}>
           CANCEL
