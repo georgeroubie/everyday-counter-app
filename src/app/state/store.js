@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { getCurrentTheme, saveThemeSelection } from '../theme/themes/helpers';
 import * as actionTypes from './actions';
 import { appReducer } from './reducer';
@@ -6,19 +6,31 @@ import { appReducer } from './reducer';
 function useAppState() {
   const [state, dispatch] = useReducer(appReducer, {
     theme: getCurrentTheme(),
-    list: [
-      {
-        id: `0`,
-        name: 'Cigarets',
-        value: 0,
-      },
-      {
-        id: `1`,
-        name: 'Coke',
-        value: 0,
-      },
-    ],
+    list: [],
   });
+
+  useEffect(() => {
+    const counters = localStorage.getItem('counters');
+    if (counters) {
+      try {
+        updateCounters(JSON.parse(counters));
+      } catch (ex) {
+        console.log(ex);
+        localStorage.removeItem('counters');
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      localStorage.setItem('counters', JSON.stringify(state.list));
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [state.list]);
 
   function setState(type, value) {
     dispatch({ type, value });
