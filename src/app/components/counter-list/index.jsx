@@ -37,11 +37,10 @@ const CounterList = () => {
           Add new
         </Button>
       </TitleWrapper>
-
-      {!list?.length ? (
-        <Description>There are no counters, add a new one.</Description>
+      {Boolean(list.length) ? (
+        list.map((listItem) => <ListItem key={listItem.id} data={listItem} />)
       ) : (
-        list.map(({ id, name }) => <ListItem key={id} id={id} name={name} />)
+        <Description>There are no counters, add a new one.</Description>
       )}
     </>
   );
