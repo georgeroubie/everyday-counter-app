@@ -18,6 +18,7 @@ import Plus from './Plus';
 import Spinner from './Spinner';
 import Times from './Times';
 import Trash from './Trash';
+import Undo from './Undo';
 import User from './User';
 
 export const iconList = {
@@ -41,6 +42,7 @@ export const iconList = {
   Times,
   Trash,
   User,
+  Undo,
 };
 
 const Icons = ({ type, ...iconProps }) => {
