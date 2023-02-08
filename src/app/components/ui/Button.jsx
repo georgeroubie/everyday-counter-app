@@ -49,6 +49,17 @@ const Wrapper = styled.button`
       }
     `}
 
+  ${({ $variation }) =>
+    $variation === 'error' &&
+    css`
+      color: ${({ theme: { colors } }) => colors.errorSecondary};
+      background-color: ${({ theme: { colors } }) => colors.errorPrimary};
+
+      &:hover {
+        background-color: ${({ theme: { colors } }) => darken(colors.errorPrimary, 10)};
+      }
+    `}
+
   ${({ $isLoading }) =>
     $isLoading &&
     css`
