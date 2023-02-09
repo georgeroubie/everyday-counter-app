@@ -43,7 +43,7 @@ const ButtonWrapper = styled.div`
 const IconButton = styled.button`
   width: 2.5rem;
   height: 2.5rem;
-  background-color: ${({ theme: { colors } }) => colors.backgroundSecondary};
+  background-color: ${({ theme: { colors } }) => colors.buttonSecondary};
   flex-shrink: 0;
   min-width: 0;
 `;
@@ -55,6 +55,7 @@ const Button = styled(_Button)`
 const Icons = styled(_Icons)`
   width: ${({ theme: { fontSize } }) => fontSize.normal};
   line-height: ${({ theme: { fontSize } }) => fontSize.normal};
+  color: ${({ theme: { colors } }) => colors.buttonSecondaryText};
 `;
 
 const ListItem = ({ data }) => {
