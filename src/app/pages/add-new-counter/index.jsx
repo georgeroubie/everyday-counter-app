@@ -61,7 +61,7 @@ const AddNewCounter = () => {
   return (
     <PageWrapper>
       <Title>Add a new counter</Title>
-      <Description>Use a friendly name for the counter, e.g. "Bottles of water".</Description>
+      <Description>Use a friendly name for the counter, e.g. "Cups of water".</Description>
       <Input label="Counter name" value={name} onChange={onNameChange} />
       <Description>Optionally add a goal to keep you motivated!</Description>
       <Input label="Counter goal" inputMode="numeric" value={goal} onChange={onGoalChange} />
