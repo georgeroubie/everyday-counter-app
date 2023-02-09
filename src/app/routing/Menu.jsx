@@ -1,37 +1,33 @@
 import { NavLink as _NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import _Icons from '../components/icons/Icons';
 
 const Wrapper = styled.nav`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: ${({ theme: { spacing } }) => spacing.large} 0;
-  gap: ${({ theme: { spacing } }) => spacing.normal};
+  position: fixed;
+  bottom: ${({ theme: { spacing } }) => spacing.large};
+  right: ${({ theme: { spacing } }) => spacing.large};
 `;
 
 const NavLink = styled(_NavLink)`
   text-decoration: none;
-  color: ${({ theme: { colors } }) => colors.textPrimary};
-
-  &.active {
-    text-decoration: underline;
-  }
+  padding: ${({ theme: { spacing } }) => spacing.normal};
+  background-color: ${({ theme: { colors } }) => colors.background};
+  display: inline-block;
+  border-radius: ${({ theme: { shapes } }) => shapes.circle};
+  width: 3rem;
+  height: 3rem;
 `;
 
-const menuItems = [
-  { path: '/', label: 'Home' },
-  { path: '/info', label: 'Info' },
-  { path: '/settings', label: 'Settings' },
-];
+const Icons = styled(_Icons)`
+  color: ${({ theme: { colors } }) => colors.textPrimary};
+`;
 
 const Menu = () => {
   return (
     <Wrapper>
-      {menuItems.map(({ path, label }) => (
-        <NavLink key={path} to={path} end>
-          {label}
-        </NavLink>
-      ))}
+      <NavLink to="/settings" end>
+        <Icons type="Gear" />
+      </NavLink>
     </Wrapper>
   );
 };
