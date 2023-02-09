@@ -38,6 +38,9 @@ const baseTheme = {
     circle: '50%',
     divider: '0.125rem',
   },
+  zIndex: {
+    fixed: 100,
+  },
 };
 
 export default baseTheme;
