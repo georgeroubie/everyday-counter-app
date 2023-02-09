@@ -6,6 +6,7 @@ const Wrapper = styled.nav`
   position: fixed;
   bottom: ${({ theme: { spacing } }) => spacing.large};
   right: ${({ theme: { spacing } }) => spacing.large};
+  z-index: ${({ theme: { zIndex } }) => zIndex.fixed};
 `;
 
 const NavLink = styled(_NavLink)`
