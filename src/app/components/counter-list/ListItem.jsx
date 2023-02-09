@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   padding: ${({ theme: { spacing } }) => spacing.large};
   margin-bottom: ${({ theme: { spacing } }) => spacing.large};
   border: ${({ theme: { colors, shapes } }) => `${shapes.divider} solid ${colors.borderPrimary}`};
+  border-radius: ${({ theme: { shapes } }) => shapes.rounded};
   user-select: none;
 `;
 
@@ -37,6 +38,8 @@ const Strong = styled.strong``;
 const ButtonWrapper = styled.div`
   display: flex;
   flex-wrap: nowrap;
+  min-width: 0;
+  flex-shrink: 0;
   gap: ${({ theme: { spacing } }) => spacing.normal};
 `;
 
@@ -44,8 +47,12 @@ const IconButton = styled.button`
   width: 2.5rem;
   height: 2.5rem;
   background-color: ${({ theme: { colors } }) => colors.buttonSecondary};
+  border-radius: ${({ theme: { shapes } }) => shapes.rounded};
   flex-shrink: 0;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Button = styled(_Button)`
@@ -53,9 +60,9 @@ const Button = styled(_Button)`
 `;
 
 const Icons = styled(_Icons)`
-  width: ${({ theme: { fontSize } }) => fontSize.normal};
-  line-height: ${({ theme: { fontSize } }) => fontSize.normal};
   color: ${({ theme: { colors } }) => colors.buttonSecondaryText};
+  width: 0.9rem;
+  flex-shrink: 0;
 `;
 
 const ListItem = ({ data }) => {
