@@ -32,7 +32,7 @@ const CounterList = () => {
   return (
     <>
       <TitleWrapper>
-        <Title>My counters</Title>
+        <Title>Counters</Title>
         <Button size="large" onClick={() => navigate('/add-new-counter')}>
           Add new
         </Button>
