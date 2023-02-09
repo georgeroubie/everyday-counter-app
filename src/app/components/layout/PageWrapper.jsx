@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Wrapper = styled.main`
-  margin: ${({ theme: { spacing } }) => spacing.xlarge} auto;
+  margin: ${({ theme: { spacing } }) => `${spacing.large} auto ${spacing.xlarge}`};
 `;
 
 const PageWrapper = ({ children }) => {
