@@ -1,12 +1,9 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PageWrapper from '../../components/layout/PageWrapper';
 import _Title from '../../components/typography/Title';
 import _Button from '../../components/ui/Button';
-import { AppContext } from '../../state/Context';
-import ListItem from './ListItem';
-import NoCounters from './NoCounters';
+import CounterList from './CounterList';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -26,8 +23,6 @@ const Button = styled(_Button)`
 `;
 
 const Home = () => {
-  const { state } = useContext(AppContext);
-  const { list } = state;
   const navigate = useNavigate();
 
   return (
@@ -38,7 +33,7 @@ const Home = () => {
           Add new
         </Button>
       </TitleWrapper>
-      {Boolean(list.length) ? list.map((listItem) => <ListItem key={listItem.id} data={listItem} />) : <NoCounters />}
+      <CounterList />
     </PageWrapper>
   );
 };
