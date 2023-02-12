@@ -8,6 +8,7 @@ import Hyperlink from '../../components/typography/Hyperlink';
 import Subtitle from '../../components/typography/Subtitle';
 import _Title from '../../components/typography/Title';
 import _Checkbox from '../../components/ui/Checkbox';
+import Donation from '../../components/ui/Donation';
 import { AppContext } from '../../state/Context';
 import { DARK_THEME_KEY } from '../../theme/themes/dark';
 import { LIGHT_THEME_KEY } from '../../theme/themes/light';
@@ -46,10 +47,13 @@ const Settings = () => {
     <PageWrapper>
       <TitleWrapper onClick={() => navigate('/')}>
         <Icons type="AngleLeft" />
-        <Title>Settings</Title>
+        <Title>Info</Title>
       </TitleWrapper>
       <Subtitle>Theme</Subtitle>
       <Checkbox label="Dark theme" checked={theme === DARK_THEME_KEY} onChange={handleOnChange} />
+      <Description>
+        <Donation />
+      </Description>
       <Subtitle>Privacy</Subtitle>
       <Description>Everyday counter web application does not use any kind of cookies or tracking.</Description>
       <Subtitle>Data</Subtitle>
