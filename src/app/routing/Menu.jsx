@@ -27,7 +27,7 @@ const Menu = () => {
   return (
     <Wrapper>
       <NavLink to="/settings" end>
-        <Icons type="Gear" />
+        <Icons type="Info" />
       </NavLink>
     </Wrapper>
   );
