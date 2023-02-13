@@ -26,7 +26,7 @@ const Icons = styled(_Icons)`
 const Menu = () => {
   return (
     <Wrapper>
-      <NavLink to="/settings" end>
+      <NavLink to="/info" end>
         <Icons type="Info" />
       </NavLink>
     </Wrapper>
