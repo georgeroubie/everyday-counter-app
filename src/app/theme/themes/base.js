@@ -5,6 +5,7 @@ const baseTheme = {
     normal: '0.5rem',
     large: '1rem',
     xlarge: '1.5rem',
+    xxlarge: '5rem',
   },
   fontSize: {
     xsmall: '0.7rem',
