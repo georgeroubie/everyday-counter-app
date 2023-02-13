@@ -20,7 +20,8 @@ const Info = styled.div`
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: ${({ theme: { spacing } }) => spacing.small};
+  width: 100%;
+  gap: ${({ theme: { spacing } }) => spacing.normal};
 `;
 
 const Text = styled.span`
@@ -55,8 +56,13 @@ const IconButton = styled.button`
   justify-content: center;
 `;
 
+const ActionWrapper = styled.div`
+  display: flex;
+  gap: ${({ theme: { spacing } }) => spacing.normal};
+`;
+
 const Button = styled(_Button)`
-  width: 9rem;
+  width: 5rem;
 `;
 
 const Icons = styled(_Icons)`
@@ -120,14 +126,16 @@ const Counter = ({ data }) => {
             Goal: <Strong>{value >= goal ? 'Achieved 🤩' : `${goal - value} more to go`}</Strong>
           </Text>
         )}
-        <Button size="small" variation="error" onClick={deleteListItem}>
-          {enableDeletion ? 'Are you sure?' : 'Delete counter'}
-        </Button>
+        <ActionWrapper>
+          <Button variation="secondary" onClick={resetValue}>
+            Reset
+          </Button>
+          <Button variation="error" onClick={deleteListItem}>
+            {enableDeletion ? 'Sure?' : 'Delete'}
+          </Button>
+        </ActionWrapper>
       </Info>
       <ButtonWrapper>
-        <IconButton onClick={resetValue}>
-          <Icons type="Undo" />
-        </IconButton>
         <IconButton disabled={value < 1} onClick={removeOne}>
           <Icons type="Minus" />
         </IconButton>
