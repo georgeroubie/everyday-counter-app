@@ -51,8 +51,7 @@ const Info = () => {
       </TitleWrapper>
       <Subtitle>About</Subtitle>
       <Description>
-        Everyday counter app, helps you count things, e.g. how many cups of water you are drinking. Also helps you stop
-        your bad habits, e.g. track how much you smoke every day. You can use it for whatever you need to track.
+        Everyday counter app, helps you count things, keeps you motivated, and enables you to stop your bad habits.
       </Description>
       <Subtitle>Theme</Subtitle>
       <Checkbox label="Dark theme" checked={theme === DARK_THEME_KEY} onChange={handleOnChange} />
