@@ -1,9 +1,6 @@
 # General information
 
-[Everyday counter app](https://everyday-counter.com), helps you count things, e.g. how many cups of water you are drinking.  
-Also helps you stop your bad habits, e.g. track how much you smoke every day.  
-You can use it for whatever you need to track.
-
+[Everyday counter app](https://everyday-counter.com), helps you count things, keeps you motivated, and enables you to stop your bad habits.
 
 # Development
 
