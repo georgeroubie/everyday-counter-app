@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import _Icons from '../../components/icons/Icons';
 import _Button from '../../components/ui/Button';
 import { AppContext } from '../../state/Context';
@@ -14,6 +14,18 @@ const Wrapper = styled.div`
   border: ${({ theme: { colors, shapes } }) => `${shapes.divider} solid ${colors.borderPrimary}`};
   border-radius: ${({ theme: { shapes } }) => shapes.rounded};
   user-select: none;
+
+  ${({ $success }) =>
+    $success &&
+    css`
+      border-color: ${({ theme: { colors } }) => colors.successPrimary};
+    `}
+
+  ${({ $error }) =>
+    $error &&
+    css`
+      border-color: ${({ theme: { colors } }) => colors.errorPrimary};
+    `}
 `;
 
 const Info = styled.div`
@@ -72,9 +84,11 @@ const Icons = styled(_Icons)`
 `;
 
 const Counter = ({ data }) => {
-  const { id, name, value, goal } = data;
+  const { id, name, value, goal, limit } = data;
   const { state, updateCounters } = useContext(AppContext);
   const { list } = state;
+  const goalIsAchieved = value >= goal;
+  const limitIsExceed = value >= limit;
   const [enableDeletion, setEnableDeletion] = useState(false);
 
   function deleteListItem() {
@@ -113,7 +127,7 @@ const Counter = ({ data }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper $success={goalIsAchieved} $error={limitIsExceed}>
       <Info>
         <Text>
           <Strong>{name}</Strong>
@@ -124,6 +138,11 @@ const Counter = ({ data }) => {
         {goal && (
           <Text>
             Goal: <Strong>{value >= goal ? 'Achieved 🤩' : `${goal - value} more to go`}</Strong>
+          </Text>
+        )}
+        {limit && (
+          <Text>
+            Available: <Strong>{limitIsExceed ? '0' : `${limit - value}`}</Strong>
           </Text>
         )}
         <ActionWrapper>
@@ -139,7 +158,7 @@ const Counter = ({ data }) => {
         <IconButton disabled={value < 1} onClick={removeOne}>
           <Icons type="Minus" />
         </IconButton>
-        <IconButton onClick={addOne}>
+        <IconButton disabled={limitIsExceed} onClick={addOne}>
           <Icons type="Plus" />
         </IconButton>
       </ButtonWrapper>
@@ -153,6 +172,7 @@ Counter.propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.number.isRequired,
     goal: PropTypes.number,
+    limit: PropTypes.number,
   }).isRequired,
 };
 
