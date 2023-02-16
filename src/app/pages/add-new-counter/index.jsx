@@ -5,6 +5,7 @@ import PageWrapper from '../../components/layout/PageWrapper';
 import Description from '../../components/typography/Description';
 import Title from '../../components/typography/Title';
 import _Button from '../../components/ui/Button';
+import _Checkbox from '../../components/ui/Checkbox';
 import _Input from '../../components/ui/Input';
 import { AppContext } from '../../state/Context';
 
@@ -28,6 +29,10 @@ const ErrorMessage = styled.div`
   margin-bottom: ${({ theme: { spacing } }) => spacing.large};
 `;
 
+const Checkbox = styled(_Checkbox)`
+  margin-bottom: ${({ theme: { spacing } }) => spacing.xlarge};
+`;
+
 const AddNewCounter = () => {
   const navigate = useNavigate();
   const { addNewCounter } = useContext(AppContext);
@@ -35,6 +40,7 @@ const AddNewCounter = () => {
   const [goal, setGoal] = useState();
   const [limit, setLimit] = useState();
   const [showLimitErrorMessage, setShowLimitErrorMessage] = useState(false);
+  const [reset, setReset] = useState(false);
 
   function isValidValue(value) {
     return value.match(/^-?\d+$/) && value < 100000000;
@@ -57,6 +63,7 @@ const AddNewCounter = () => {
 
     if (!value) {
       setLimit();
+      setShowLimitErrorMessage(false);
       return;
     }
 
@@ -90,13 +97,11 @@ const AddNewCounter = () => {
   }
 
   function save() {
-    addNewCounter({
-      id: `${new Date().valueOf()}`,
-      name,
-      goal,
-      limit,
-      value: 0,
-    });
+    const now = new Date();
+    const id = `${now.valueOf()}`;
+    const day = now.getDate();
+    const value = 0;
+    addNewCounter({ id, name, goal, limit, value, reset, day });
     goToHome();
   }
 
@@ -110,6 +115,7 @@ const AddNewCounter = () => {
       <Description>Add a limit to help you control yourself</Description>
       <Input label="Counter limit" inputMode="numeric" value={limit} onChange={onLimitChange} />
       {showLimitErrorMessage && <ErrorMessage>Limit must be bigger than goal</ErrorMessage>}
+      <Checkbox label="Reset counter at midnight" checked={reset} onChange={setReset} />
       <ButtonWrapper>
         <Button variation="secondary" size="large" onClick={goToHome}>
           CANCEL
