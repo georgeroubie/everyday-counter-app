@@ -13,7 +13,20 @@ function useAppState() {
     const counters = localStorage.getItem('counters');
     if (counters) {
       try {
-        updateCounters(JSON.parse(counters));
+        const now = new Date();
+        const day = now.getDate();
+
+        const parsedCounters = JSON.parse(counters);
+        const updatedCounters = parsedCounters.map((counter) => {
+          let value = counter.value;
+          if (counter.reset && day !== counter.day) {
+            value = 0;
+          }
+
+          return { ...counter, day, value };
+        });
+
+        updateCounters(updatedCounters);
       } catch (ex) {
         console.log(ex);
         localStorage.removeItem('counters');
@@ -25,7 +38,7 @@ function useAppState() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       localStorage.setItem('counters', JSON.stringify(state.list));
-    }, 2000);
+    }, 1000);
 
     return () => {
       clearTimeout(timeout);
