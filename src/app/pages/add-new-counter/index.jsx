@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PageWrapper from '../../components/layout/PageWrapper';
@@ -42,16 +42,22 @@ const AddNewCounter = () => {
   const [showLimitErrorMessage, setShowLimitErrorMessage] = useState(false);
   const [reset, setReset] = useState(false);
 
+  useEffect(() => {
+    if (!goal || !limit) {
+      setShowLimitErrorMessage(false);
+    }
+  }, [goal, limit]);
+
+  function goToHome() {
+    navigate('/');
+  }
+
   function isValidValue(value) {
     return value.match(/^-?\d+$/) && value < 100000000;
   }
 
   function saveValue(value, setValue) {
     setValue(Math.abs(value));
-  }
-
-  function goToHome() {
-    navigate('/');
   }
 
   function onNameChange({ target }) {
@@ -63,17 +69,12 @@ const AddNewCounter = () => {
 
     if (!value) {
       setLimit();
-      setShowLimitErrorMessage(false);
       return;
     }
 
     if (isValidValue(value)) {
-      if (goal && value < goal) {
-        setShowLimitErrorMessage(true);
-      } else {
-        setShowLimitErrorMessage(false);
-      }
-
+      const hasError = Boolean(goal && value < goal);
+      setShowLimitErrorMessage(hasError);
       saveValue(value, setLimit);
     }
   }
@@ -87,11 +88,8 @@ const AddNewCounter = () => {
     }
 
     if (isValidValue(value)) {
-      if (limit && value > limit) {
-        setShowLimitErrorMessage(true);
-      } else {
-        setShowLimitErrorMessage(false);
-      }
+      const hasError = Boolean(limit && value > limit);
+      setShowLimitErrorMessage(hasError);
       saveValue(value, setGoal);
     }
   }
