@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PageWrapper from '../../components/layout/PageWrapper';
-import Description from '../../components/typography/Description';
 import Title from '../../components/typography/Title';
 import _Button from '../../components/ui/Button';
 import _Checkbox from '../../components/ui/Checkbox';
@@ -106,14 +105,11 @@ const AddNewCounter = () => {
   return (
     <PageWrapper>
       <Title>Add a new counter</Title>
-      <Description>Use a friendly name for the counter, e.g. "Cups of water".</Description>
-      <Input label="Counter name" value={name} onChange={onNameChange} />
-      <Description>Add a goal to keep you motivated</Description>
-      <Input label="Counter goal" inputMode="numeric" value={goal} onChange={onGoalChange} />
-      <Description>Add a limit to help you control yourself</Description>
-      <Input label="Counter limit" inputMode="numeric" value={limit} onChange={onLimitChange} />
+      <Input label="Name" value={name} onChange={onNameChange} />
+      <Input label="Goal" inputMode="numeric" value={goal} onChange={onGoalChange} />
+      <Input label="Limit" inputMode="numeric" value={limit} onChange={onLimitChange} />
       {showLimitErrorMessage && <ErrorMessage>Limit must be bigger than goal</ErrorMessage>}
-      <Checkbox label="Reset counter at midnight" checked={reset} onChange={setReset} />
+      <Checkbox label="Reset at midnight" checked={reset} onChange={setReset} />
       <ButtonWrapper>
         <Button variation="secondary" size="large" onClick={goToHome}>
           CANCEL
