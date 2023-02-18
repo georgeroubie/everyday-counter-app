@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import _Icons from '../../components/icons/Icons';
+import _BottomArea from '../../components/layout/BottomArea';
 import PageWrapper from '../../components/layout/PageWrapper';
 import Description from '../../components/typography/Description';
 import Hyperlink from '../../components/typography/Hyperlink';
@@ -34,6 +35,12 @@ const Icons = styled(_Icons)`
   height: 2.5rem;
 `;
 
+const BottomArea = styled(_BottomArea)`
+  padding-top: ${({ theme: { spacing } }) => spacing.normal};
+  padding-bottom: ${({ theme: { spacing } }) => spacing.normal};
+  height: 76px;
+`;
+
 const Info = () => {
   const { state, setTheme } = useContext(AppContext);
   const { theme } = state;
@@ -49,14 +56,11 @@ const Info = () => {
         <Icons type="AngleLeft" />
         <Title>Info</Title>
       </TitleWrapper>
+      <Subtitle>Theme</Subtitle>
+      <Checkbox label="Dark theme" checked={theme === DARK_THEME_KEY} onChange={handleOnChange} />
       <Subtitle>About</Subtitle>
       <Description>
         Everyday counter app, helps you count things, keeps you motivated, and enables you to stop your bad habits.
-      </Description>
-      <Subtitle>Theme</Subtitle>
-      <Checkbox label="Dark theme" checked={theme === DARK_THEME_KEY} onChange={handleOnChange} />
-      <Description>
-        <Donation />
       </Description>
       <Subtitle>Privacy</Subtitle>
       <Description>Everyday counter web application does not use any kind of cookies or tracking.</Description>
@@ -93,6 +97,9 @@ const Info = () => {
         </Hyperlink>
         .
       </Description>
+      <BottomArea>
+        <Donation />
+      </BottomArea>
     </PageWrapper>
   );
 };
