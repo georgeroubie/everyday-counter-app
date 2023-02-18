@@ -1,20 +1,26 @@
 import styled from 'styled-components';
-import Hyperlink from '../typography/Hyperlink';
-import Subtitle from '../typography/Subtitle';
+import _Hyperlink from '../typography/Hyperlink';
+
+const Wrapper = styled.div`
+  text-align: center;
+`;
 
 const Image = styled.img`
-  width: 200px;
+  width: 210px;
   height: auto;
+`;
+
+const Hyperlink = styled(_Hyperlink)`
+  height: 60px;
 `;
 
 const Donation = () => {
   return (
-    <>
-      <Subtitle>Donation</Subtitle>
+    <Wrapper>
       <Hyperlink href="https://www.buymeacoffee.com/georgeroubie" target="_blank">
         <Image src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" />
       </Hyperlink>
-    </>
+    </Wrapper>
   );
 };
 
