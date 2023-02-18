@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import BottomArea from '../../components/layout/BottomArea';
 import PageWrapper from '../../components/layout/PageWrapper';
 import Title from '../../components/typography/Title';
 import _Button from '../../components/ui/Button';
-import _Checkbox from '../../components/ui/Checkbox';
+import Checkbox from '../../components/ui/Checkbox';
 import _Input from '../../components/ui/Input';
 import { AppContext } from '../../state/Context';
 
@@ -26,10 +27,6 @@ const ErrorMessage = styled.div`
   font-weight: ${({ theme: { fontWeight } }) => fontWeight.bold};
   margin-top: -${({ theme: { spacing } }) => spacing.normal};
   margin-bottom: ${({ theme: { spacing } }) => spacing.large};
-`;
-
-const Checkbox = styled(_Checkbox)`
-  margin-bottom: ${({ theme: { spacing } }) => spacing.xlarge};
 `;
 
 const AddNewCounter = () => {
@@ -110,14 +107,16 @@ const AddNewCounter = () => {
       <Input label="Limit" inputMode="numeric" value={limit} onChange={onLimitChange} />
       {showLimitErrorMessage && <ErrorMessage>Limit must be bigger than goal</ErrorMessage>}
       <Checkbox label="Reset at midnight" checked={reset} onChange={setReset} />
-      <ButtonWrapper>
-        <Button variation="secondary" size="large" onClick={goToHome}>
-          CANCEL
-        </Button>
-        <Button size="large" disabled={!name || showLimitErrorMessage} onClick={save}>
-          SAVE
-        </Button>
-      </ButtonWrapper>
+      <BottomArea>
+        <ButtonWrapper>
+          <Button variation="secondary" size="large" onClick={goToHome}>
+            CANCEL
+          </Button>
+          <Button size="large" disabled={!name || showLimitErrorMessage} onClick={save}>
+            SAVE
+          </Button>
+        </ButtonWrapper>
+      </BottomArea>
     </PageWrapper>
   );
 };
