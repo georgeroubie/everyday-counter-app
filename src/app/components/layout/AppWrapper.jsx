@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
   padding: 0 ${({ theme: { spacing } }) => spacing.large};
   background-color: ${({ theme: { colors } }) => colors.surface};
+  position: relative;
 `;
 
 function getHeight() {
