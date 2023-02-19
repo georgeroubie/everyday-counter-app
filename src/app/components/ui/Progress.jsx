@@ -17,7 +17,9 @@ const Label = styled.strong`
   transform: translate(-50%, -50%);
 `;
 
-const Svg = styled.svg``;
+const Svg = styled.svg`
+  position: relative;
+`;
 
 const Circle = styled.circle`
   fill: transparent;
@@ -49,15 +51,16 @@ const LightCircle = styled(Circle)`
 `;
 
 const Progress = (props) => {
-  const { className, label, value, total } = props;
+  const { className, label, value, total, error } = props;
   const dashoffset = value >= total ? CIRCLE_TOTAL : (value * CIRCLE_TOTAL) / total;
 
   return (
     <Wrapper className={className}>
       <Label>{label}</Label>
       <Svg width="200" height="200" viewport="0 0 100 100">
-        <DarkCircle r="90" cx="100" cy="100" />
+        <DarkCircle $error={error} r="90" cx="100" cy="100" />
         <LightCircle
+          $error={error}
           r="90"
           cx="100"
           cy="100"
@@ -75,10 +78,12 @@ Progress.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  error: PropTypes.bool,
 };
 
 Progress.defaultProps = {
   className: '',
+  error: false,
 };
 
 export default Progress;
