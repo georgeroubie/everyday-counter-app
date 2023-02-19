@@ -36,8 +36,6 @@ const Icons = styled(_Icons)`
 `;
 
 const BottomArea = styled(_BottomArea)`
-  padding-top: ${({ theme: { spacing } }) => spacing.normal};
-  padding-bottom: ${({ theme: { spacing } }) => spacing.normal};
   height: 76px;
 `;
 
