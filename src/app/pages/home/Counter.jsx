@@ -1,13 +1,18 @@
 import PropTypes from 'prop-types';
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
 import _Icons from '../../components/icons/Icons';
-import Subtitle from '../../components/typography/Subtitle';
+import _Subtitle from '../../components/typography/Subtitle';
 import _Button from '../../components/ui/Button';
 import Progress from '../../components/ui/Progress';
 import { AppContext } from '../../state/Context';
 
 const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-width: 0;
+  gap: ${({ theme: { spacing } }) => spacing.normal};
   padding: ${({ theme: { spacing } }) => spacing.large};
   margin-bottom: ${({ theme: { spacing } }) => spacing.large};
   border: ${({ theme: { colors, shapes } }) => `${shapes.divider} solid ${colors.borderPrimary}`};
@@ -27,13 +32,16 @@ const Wrapper = styled.div`
     `}
 `;
 
+const Subtitle = styled(_Subtitle)`
+  margin-bottom: 0;
+`;
+
 const Strong = styled.strong``;
 
 const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: ${({ theme: { spacing } }) => spacing.normal};
   min-width: 0;
 `;
 
@@ -72,9 +80,27 @@ const Counter = ({ className, data }) => {
   const { id, name, value, goal, limit } = data;
   const { state, updateCounters } = useContext(AppContext);
   const { list } = state;
-  const goalIsAchieved = value >= goal;
-  const limitIsExceed = value >= limit;
+  const goalIsAchieved = goal ? value >= goal : true;
+  const limitIsExceed = limit ? value >= limit : false;
   const [enableDeletion, setEnableDeletion] = useState(false);
+
+  const showGoal = useMemo(() => {
+    if (goal) {
+      if (!goalIsAchieved) {
+        return true;
+      }
+      if (limit) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    return false;
+  }, [goal, limit, goalIsAchieved]);
+
+  const showLimit = useMemo(() => {
+    return limit && goalIsAchieved;
+  }, [limit, goalIsAchieved]);
 
   function deleteListItem() {
     if (!enableDeletion) {
@@ -108,13 +134,16 @@ const Counter = ({ className, data }) => {
   }
 
   return (
-    <Wrapper className={className} $success={goalIsAchieved} $error={limitIsExceed}>
+    <Wrapper className={className} $success={goal && goalIsAchieved} $error={limitIsExceed}>
       <Subtitle>{name}</Subtitle>
-      {goal && <Progress label={value >= goal ? '🤩' : 'Goal'} value={value} total={goal} />}
-      {limit && (
-        <span>
-          Available: <Strong>{limitIsExceed ? '0' : `${limit - value}`}</Strong>
-        </span>
+      {showGoal && <Progress label={goalIsAchieved ? '🤩' : 'Goal'} value={value} total={goal} />}
+      {showLimit && (
+        <Progress
+          label={limitIsExceed ? '0 available' : `${limit - value} available`}
+          value={value}
+          total={limit}
+          error
+        />
       )}
       <ButtonWrapper>
         <Button variation="error" onClick={deleteListItem}>
