@@ -2,13 +2,12 @@ import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
 import styled, { css } from 'styled-components';
 import _Icons from '../../components/icons/Icons';
+import Subtitle from '../../components/typography/Subtitle';
 import _Button from '../../components/ui/Button';
+import Progress from '../../components/ui/Progress';
 import { AppContext } from '../../state/Context';
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: ${({ theme: { spacing } }) => spacing.large};
   padding: ${({ theme: { spacing } }) => spacing.large};
   margin-bottom: ${({ theme: { spacing } }) => spacing.large};
   border: ${({ theme: { colors, shapes } }) => `${shapes.divider} solid ${colors.borderPrimary}`};
@@ -28,28 +27,19 @@ const Wrapper = styled.div`
     `}
 `;
 
-const Info = styled.div`
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: ${({ theme: { spacing } }) => spacing.normal};
-`;
-
-const Text = styled.span`
-  font-size: ${({ theme: { fontSize } }) => fontSize.normal};
-  min-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: block;
-  width: 100%;
-`;
-
 const Strong = styled.strong``;
 
 const ButtonWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: ${({ theme: { spacing } }) => spacing.normal};
+  min-width: 0;
+`;
+
+const IconButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
   flex-wrap: nowrap;
   min-width: 0;
   flex-shrink: 0;
@@ -68,11 +58,6 @@ const IconButton = styled.button`
   justify-content: center;
 `;
 
-const ActionWrapper = styled.div`
-  display: flex;
-  gap: ${({ theme: { spacing } }) => spacing.normal};
-`;
-
 const Button = styled(_Button)`
   width: 5rem;
 `;
@@ -83,7 +68,7 @@ const Icons = styled(_Icons)`
   flex-shrink: 0;
 `;
 
-const Counter = ({ data }) => {
+const Counter = ({ className, data }) => {
   const { id, name, value, goal, limit } = data;
   const { state, updateCounters } = useContext(AppContext);
   const { list } = state;
@@ -114,10 +99,6 @@ const Counter = ({ data }) => {
     updateCounters(updatedList);
   }
 
-  function resetValue() {
-    changeValue(0);
-  }
-
   function addOne() {
     changeValue(value + 1);
   }
@@ -127,46 +108,34 @@ const Counter = ({ data }) => {
   }
 
   return (
-    <Wrapper $success={goalIsAchieved} $error={limitIsExceed}>
-      <Info>
-        <Text>
-          <Strong>{name}</Strong>
-        </Text>
-        <Text>
-          Current: <Strong>{value}</Strong>
-        </Text>
-        {goal && (
-          <Text>
-            Goal: <Strong>{value >= goal ? 'Achieved 🤩' : `${goal - value} more to go`}</Strong>
-          </Text>
-        )}
-        {limit && (
-          <Text>
-            Available: <Strong>{limitIsExceed ? '0' : `${limit - value}`}</Strong>
-          </Text>
-        )}
-        <ActionWrapper>
-          <Button variation="secondary" onClick={resetValue}>
-            Reset
-          </Button>
-          <Button variation="error" onClick={deleteListItem}>
-            {enableDeletion ? 'Sure?' : 'Delete'}
-          </Button>
-        </ActionWrapper>
-      </Info>
+    <Wrapper className={className} $success={goalIsAchieved} $error={limitIsExceed}>
+      <Subtitle>{name}</Subtitle>
+      {goal && <Progress label={value >= goal ? '🤩' : 'Goal'} value={value} total={goal} />}
+      {limit && (
+        <span>
+          Available: <Strong>{limitIsExceed ? '0' : `${limit - value}`}</Strong>
+        </span>
+      )}
       <ButtonWrapper>
-        <IconButton disabled={value < 1} onClick={removeOne}>
-          <Icons type="Minus" />
-        </IconButton>
-        <IconButton disabled={limitIsExceed} onClick={addOne}>
-          <Icons type="Plus" />
-        </IconButton>
+        <Button variation="error" onClick={deleteListItem}>
+          {enableDeletion ? 'Sure?' : 'Delete'}
+        </Button>
+        <IconButtonWrapper>
+          <IconButton disabled={value < 1} onClick={removeOne}>
+            <Icons type="Minus" />
+          </IconButton>
+          <Strong>{value}</Strong>
+          <IconButton disabled={limitIsExceed} onClick={addOne}>
+            <Icons type="Plus" />
+          </IconButton>
+        </IconButtonWrapper>
       </ButtonWrapper>
     </Wrapper>
   );
 };
 
 Counter.propTypes = {
+  className: PropTypes.string,
   data: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -174,6 +143,10 @@ Counter.propTypes = {
     goal: PropTypes.number,
     limit: PropTypes.number,
   }).isRequired,
+};
+
+Counter.defaultProps = {
+  className: '',
 };
 
 export default Counter;
