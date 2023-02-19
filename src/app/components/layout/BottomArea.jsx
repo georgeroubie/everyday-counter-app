@@ -7,11 +7,12 @@ const Wrapper = styled.div`
   padding: ${({ theme: { spacing } }) => spacing.large};
   width: 100%;
   background-color: ${({ theme: { colors } }) => colors.background};
-  z-index: 1;
+  z-index: ${({ theme: { zIndex } }) => zIndex.fixed};
+  border-top: ${({ theme: { colors, shapes } }) => `${shapes.divider} solid ${colors.borderPrimary}`};
 `;
 
 const Items = styled.div`
-  max-width: 960px;
+  max-width: 990px;
   margin: 0 auto;
 `;
 
