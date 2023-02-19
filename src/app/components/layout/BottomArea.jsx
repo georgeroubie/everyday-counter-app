@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   position: fixed;
   left: 0;
   bottom: 0;
-  padding: ${({ theme: { spacing } }) => spacing.large};
+  padding: ${({ theme: { spacing } }) => `${spacing.normal} ${spacing.large}`};
   width: 100%;
   background-color: ${({ theme: { colors } }) => colors.background};
   z-index: ${({ theme: { zIndex } }) => zIndex.fixed};
