@@ -6,12 +6,12 @@ const Wrapper = styled.div`
 `;
 
 const Image = styled.img`
-  width: 210px;
+  width: 185px;
   height: auto;
 `;
 
 const Hyperlink = styled(_Hyperlink)`
-  height: 60px;
+  height: 52px;
 `;
 
 const Donation = () => {

@@ -36,7 +36,7 @@ const Icons = styled(_Icons)`
 `;
 
 const BottomArea = styled(_BottomArea)`
-  height: 76px;
+  height: 70px;
 `;
 
 const Info = () => {

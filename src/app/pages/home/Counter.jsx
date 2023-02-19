@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
   min-width: 0;
-  gap: ${({ theme: { spacing } }) => spacing.normal};
+  gap: ${({ theme: { spacing } }) => spacing.large};
   padding: ${({ theme: { spacing } }) => spacing.large};
   margin-bottom: ${({ theme: { spacing } }) => spacing.large};
   border: ${({ theme: { colors, shapes } }) => `${shapes.divider} solid ${colors.borderPrimary}`};
@@ -36,7 +36,12 @@ const Subtitle = styled(_Subtitle)`
   margin-bottom: 0;
 `;
 
-const Strong = styled.strong``;
+const Strong = styled.strong`
+  min-width: 2.3rem;
+  text-align: center;
+  display: inline-block;
+  font-size: ${({ theme: { fontSize } }) => fontSize.large};
+`;
 
 const ButtonWrapper = styled.div`
   display: flex;

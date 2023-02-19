@@ -22,16 +22,9 @@ const baseTheme = {
     xlarge: '2.4rem',
   },
   fontWeight: {
-    thin: 100,
-    extraLight: 200,
-    light: 300,
     normal: 400,
-    medium: 500,
-    semiBold: 600,
-    bold: 700,
-    extraBold: 800,
-    black: 900,
-    extraBlack: 950,
+    bold: 500,
+    extraBold: 700,
   },
   shapes: {
     rectangle: '0px',
