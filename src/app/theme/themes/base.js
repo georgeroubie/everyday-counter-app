@@ -42,6 +42,9 @@ const baseTheme = {
   zIndex: {
     fixed: 100,
   },
+  breakpoints: {
+    lg: `min-width: 992px`,
+  },
 };
 
 export default baseTheme;
