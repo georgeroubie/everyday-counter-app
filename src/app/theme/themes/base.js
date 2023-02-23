@@ -11,15 +11,15 @@ const baseTheme = {
     xsmall: '0.7rem',
     small: '0.85rem',
     normal: '1rem',
-    large: '1.5rem',
-    xlarge: '2rem',
+    large: '1.4rem',
+    xlarge: '1.8rem',
   },
   lineHeight: {
     xsmall: '0.85rem',
     small: '1rem',
     normal: '1.2rem',
-    large: '1.8rem',
-    xlarge: '2.4rem',
+    large: '1.7rem',
+    xlarge: '2.1rem',
   },
   fontWeight: {
     normal: 400,
@@ -29,6 +29,7 @@ const baseTheme = {
   shapes: {
     rectangle: '0px',
     rounded: '8px',
+    roundedLarge: '30px',
     circle: '50%',
     divider: '0.125rem',
   },
