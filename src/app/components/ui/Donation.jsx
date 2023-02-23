@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import _Hyperlink from '../typography/Hyperlink';
 
 const Wrapper = styled.div`
-  text-align: center;
+  background-color: #ffdd00;
+  border-radius: ${({ theme: { shapes } }) => shapes.rounded};
 `;
 
 const Image = styled.img`
@@ -11,7 +12,10 @@ const Image = styled.img`
 `;
 
 const Hyperlink = styled(_Hyperlink)`
+  display: block;
+  text-align: center;
   height: 52px;
+  width: 100%;
 `;
 
 const Donation = () => {
