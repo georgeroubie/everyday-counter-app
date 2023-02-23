@@ -9,12 +9,20 @@ const Wrapper = styled.div`
   width: 100%;
   background-color: ${({ theme: { colors } }) => colors.background};
   z-index: ${({ theme: { zIndex } }) => zIndex.fixed};
-  border-top: ${({ theme: { colors, shapes } }) => `${shapes.divider} solid ${colors.borderPrimary}`};
+
+  @media (${({ theme: { breakpoints } }) => breakpoints.lg}) {
+    position: static;
+    background: none;
+  }
 `;
 
 const Items = styled.div`
-  max-width: 990px;
+  max-width: 630px;
   margin: 0 auto;
+
+  @media (${({ theme: { breakpoints } }) => breakpoints.lg}) {
+    margin-top: ${({ theme: { spacing } }) => spacing.xlarge};
+  }
 `;
 
 const BottomArea = (props) => {
