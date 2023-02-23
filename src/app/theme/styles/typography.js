@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 const typography = css`
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: ${({ theme: { fontSize } }) => fontSize.normal};
