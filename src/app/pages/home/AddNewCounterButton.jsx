@@ -11,7 +11,7 @@ const AddNewCounterButton = () => {
   return (
     <BottomArea>
       <Button size="large" onClick={() => navigate('/add-new-counter')}>
-        Add new
+        Add counter
       </Button>
     </BottomArea>
   );
