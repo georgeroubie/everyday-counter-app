@@ -7,6 +7,7 @@ const Wrapper = styled.main`
 
   @media (${({ theme: { breakpoints } }) => breakpoints.lg}) {
     max-width: 390px;
+    margin: ${({ theme: { spacing } }) => `${spacing.large} auto ${spacing.large}`};
   }
 `;
 
