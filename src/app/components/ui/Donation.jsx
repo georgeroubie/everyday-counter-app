@@ -4,17 +4,18 @@ import _Hyperlink from '../typography/Hyperlink';
 const Wrapper = styled.div`
   background-color: #ffdd00;
   border-radius: ${({ theme: { shapes } }) => shapes.rounded};
+  height: 51px;
 `;
 
 const Image = styled.img`
-  width: 185px;
+  width: 182px;
   height: auto;
 `;
 
 const Hyperlink = styled(_Hyperlink)`
   display: block;
   text-align: center;
-  height: 52px;
+  height: 51px;
   width: 100%;
 `;
 
