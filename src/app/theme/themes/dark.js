@@ -25,7 +25,7 @@ const darkThemeColorValues = {
 
 const colors = {
   background: darkThemeColorValues.black,
-  backgroundSecondary: darkThemeColorValues.greyLighter,
+  backgroundSecondary: darkThemeColorValues.blackLightest,
   surface: darkThemeColorValues.blackLight,
   surfaceSecondary: darkThemeColorValues.greyLighter,
   successPrimary: darkThemeColorValues.green,
