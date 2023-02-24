@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   @media (${({ theme: { breakpoints } }) => breakpoints.lg}) {
     position: static;
     background: none;
+    padding: 0;
   }
 `;
 
