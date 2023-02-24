@@ -101,7 +101,7 @@ const AddNewCounter = () => {
 
   return (
     <PageWrapper>
-      <Title>Add a new counter</Title>
+      <Title onBack={goToHome}>Add a new counter</Title>
       <Input label="*Name" value={name} onChange={onNameChange} />
       <Input label="Goal" inputMode="numeric" value={goal} onChange={onGoalChange} />
       <Input label="Limit" inputMode="numeric" value={limit} onChange={onLimitChange} />
