@@ -10,7 +10,7 @@ const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: ${({ theme: { spacing } }) => spacing.large};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.xlarge};
   gap: ${({ theme: { spacing } }) => spacing.large};
   position: relative;
 `;
@@ -20,7 +20,7 @@ const Image = styled.img``;
 const NavLink = styled(_NavLink)`
   text-decoration: none;
   padding: ${({ theme: { spacing } }) => spacing.normal};
-  background-color: ${({ theme: { colors } }) => colors.background};
+  background-color: ${({ theme: { colors } }) => colors.backgroundSecondary};
   display: inline-block;
   border-radius: ${({ theme: { shapes } }) => shapes.circle};
   width: 2.3rem;
