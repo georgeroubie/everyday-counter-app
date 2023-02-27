@@ -14,6 +14,12 @@ const Wrapper = styled.div`
 const Description = styled.span`
   display: inline-block;
 
+  ${({ $disabled }) =>
+    $disabled &&
+    css`
+      opacity: 0.3;
+    `}
+
   &::before {
     content: '';
     display: inline-block;
@@ -35,6 +41,8 @@ const Description = styled.span`
       `}
   }
 `;
+
+const Empty = styled.span``;
 
 const Value = styled.span`
   display: inline-block;
@@ -74,21 +82,25 @@ const GoalText = ({ value, goal, limit }) => {
 
   return (
     <Wrapper>
-      {hasGoal && (
-        <>
-          <Description $type="goal">Goal:</Description>
-          <Value $type="goal" $completed={goalIsAchieved}>
-            {value}/{goal}
-          </Value>
-        </>
+      <Description $type="goal" $disabled={!hasGoal}>
+        Goal:
+      </Description>
+      {hasGoal ? (
+        <Value $type="goal" $completed={goalIsAchieved}>
+          {value}/{goal}
+        </Value>
+      ) : (
+        <Empty />
       )}
-      {hasLimit && (
-        <>
-          <Description $type="limit">Limit:</Description>
-          <Value $type="limit" $completed={limitIsExceed}>
-            {value}/{limit}
-          </Value>
-        </>
+      <Description $type="limit" $disabled={!hasLimit}>
+        Limit:
+      </Description>
+      {hasLimit ? (
+        <Value $type="limit" $completed={limitIsExceed}>
+          {value}/{limit}
+        </Value>
+      ) : (
+        <Empty />
       )}
     </Wrapper>
   );
