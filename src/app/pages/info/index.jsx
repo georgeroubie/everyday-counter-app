@@ -39,7 +39,7 @@ const Info = () => {
       <Title onBack={goToHome}>Info</Title>
       <Card>
         <Subtitle>Theme</Subtitle>
-        <Checkbox label="Dark theme" checked={theme === DARK_THEME_KEY} onChange={handleOnChange} />
+        <Checkbox label="Dark UI" checked={theme === DARK_THEME_KEY} onChange={handleOnChange} />
       </Card>
       <Card>
         <Subtitle>About</Subtitle>
