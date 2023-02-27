@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { AppContext } from '../../state/Context';
-import Counter from './Counter';
+import Counter from './counter/index';
 import NoCounters from './NoCounters';
 
 const Wrapper = styled.div``;
