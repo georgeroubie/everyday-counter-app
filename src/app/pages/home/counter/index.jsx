@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import _Icons from '../../../components/icons/Icons';
 import _Button from '../../../components/ui/Button';
-import Progress from '../../../components/ui/Progress';
 import { AppContext } from '../../../state/Context';
+import GoalProgress from './GoalProgress';
 import GoalText from './GoalText';
 
 const Wrapper = styled.div`
@@ -21,7 +21,9 @@ const Wrapper = styled.div`
   user-select: none;
 `;
 
-const Text = styled.span``;
+const Text = styled.span`
+  font-size: ${({ theme: { fontSize } }) => fontSize.large};
+`;
 
 const GoalWrapper = styled.div`
   display: flex;
@@ -36,16 +38,6 @@ const Strong = styled.strong`
   text-align: center;
   display: inline-block;
   font-size: ${({ theme: { fontSize } }) => fontSize.large};
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: max-content;
-  justify-content: space-between;
-  gap: ${({ theme: { spacing } }) => spacing.normal};
-  min-width: 0;
 `;
 
 const IconButtonWrapper = styled.div`
@@ -69,8 +61,13 @@ const IconButton = styled.button`
   justify-content: center;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 const Button = styled(_Button)`
-  width: 100%;
+  width: 5rem;
 `;
 
 const Icons = styled(_Icons)`
@@ -83,27 +80,8 @@ const Counter = ({ className, data }) => {
   const { id, name, value, goal, limit } = data;
   const { state, updateCounters } = useContext(AppContext);
   const { list } = state;
-  const goalIsAchieved = goal ? value >= goal : true;
   const limitIsExceed = limit ? value >= limit : false;
   const [enableDeletion, setEnableDeletion] = useState(false);
-
-  const showGoal = useMemo(() => {
-    if (goal) {
-      if (!goalIsAchieved) {
-        return true;
-      }
-      if (limit) {
-        return false;
-      } else {
-        return true;
-      }
-    }
-    return false;
-  }, [goal, limit, goalIsAchieved]);
-
-  const showLimit = useMemo(() => {
-    return limit && goalIsAchieved;
-  }, [limit, goalIsAchieved]);
 
   function deleteListItem() {
     if (!enableDeletion) {
@@ -137,35 +115,26 @@ const Counter = ({ className, data }) => {
   }
 
   return (
-    <Wrapper className={className} $success={goal && goalIsAchieved} $error={limitIsExceed}>
+    <Wrapper className={className}>
       <Text>{name}</Text>
       <GoalWrapper>
         <GoalText value={value} goal={goal} limit={limit} />
-        <ButtonWrapper>
-          <IconButtonWrapper>
-            <IconButton disabled={value < 1} onClick={removeOne}>
-              <Icons type="Minus" />
-            </IconButton>
-            <Strong>{value}</Strong>
-            <IconButton disabled={limitIsExceed} onClick={addOne}>
-              <Icons type="Plus" />
-            </IconButton>
-          </IconButtonWrapper>
-          <Button variation="error" onClick={deleteListItem}>
-            {enableDeletion ? 'Sure?' : 'Delete'}
-          </Button>
-        </ButtonWrapper>
+        <IconButtonWrapper>
+          <IconButton disabled={value < 1} onClick={removeOne}>
+            <Icons type="Minus" />
+          </IconButton>
+          <Strong>{value}</Strong>
+          <IconButton disabled={limitIsExceed} onClick={addOne}>
+            <Icons type="Plus" />
+          </IconButton>
+        </IconButtonWrapper>
       </GoalWrapper>
-
-      {showGoal && <Progress label={goalIsAchieved ? '🤩' : 'Goal'} value={value} total={goal} />}
-      {showLimit && (
-        <Progress
-          label={limitIsExceed ? '0 available' : `${limit - value} available`}
-          value={value}
-          total={limit}
-          error
-        />
-      )}
+      <GoalProgress value={value} goal={goal} limit={limit} />
+      <ButtonWrapper>
+        <Button variation="error" onClick={deleteListItem}>
+          {enableDeletion ? 'Sure?' : 'Delete'}
+        </Button>
+      </ButtonWrapper>
     </Wrapper>
   );
 };
