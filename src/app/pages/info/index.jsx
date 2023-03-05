@@ -63,7 +63,7 @@ const Info = () => {
         <Text>
           You can find the code of this web application on my GitHub page. If you like it give the repository a star
           on&nbsp;
-          <Hyperlink href="https://github.com/georgeroubie/everyday-counter" target="_blank" rel="noreferrer">
+          <Hyperlink href="https://github.com/georgeroubie/everyday-counter-app" target="_blank" rel="noreferrer">
             GitHub
           </Hyperlink>
           .
