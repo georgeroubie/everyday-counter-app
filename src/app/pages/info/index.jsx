@@ -49,7 +49,7 @@ const Info = () => {
       </Card>
       <Card>
         <Subtitle>Privacy</Subtitle>
-        <Text>Everyday counter web application does not use any kind of cookies or tracking.</Text>
+        <Text>Everyday counter app does not use any kind of cookies or tracking.</Text>
       </Card>
       <Card>
         <Subtitle>Data</Subtitle>
