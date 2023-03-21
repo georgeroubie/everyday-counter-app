@@ -14,6 +14,7 @@ const H1 = styled.h1`
   line-height: ${({ theme: { lineHeight } }) => lineHeight.xlarge};
   font-weight: ${({ theme: { fontWeight } }) => fontWeight.extraBold};
   cursor: default;
+  margin: 0;
 `;
 
 const Icons = styled(_Icons)`
