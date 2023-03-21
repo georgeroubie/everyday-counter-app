@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import _Icons from '../../../components/icons/Icons';
-import _Button from '../../../components/ui/Button';
 import { AppContext } from '../../../state/Context';
 import GoalProgress from './GoalProgress';
 import GoalText from './GoalText';
@@ -22,7 +22,11 @@ const Wrapper = styled.div`
 `;
 
 const Text = styled.span`
+  cursor: pointer;
   font-size: ${({ theme: { fontSize } }) => fontSize.large};
+  display: flex;
+  gap: ${({ theme: { spacing } }) => spacing.normal};
+  align-items: center;
 `;
 
 const GoalWrapper = styled.div`
@@ -61,36 +65,26 @@ const IconButton = styled.button`
   justify-content: center;
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const Button = styled(_Button)`
-  width: 5rem;
-`;
-
 const Icons = styled(_Icons)`
   color: ${({ theme: { colors } }) => colors.buttonSecondaryText};
   width: 0.9rem;
   flex-shrink: 0;
 `;
 
+const Edit = styled(_Icons)`
+  color: ${({ theme: { colors } }) => colors.textPrimary};
+  width: 0.5rem;
+`;
+
 const Counter = ({ className, data }) => {
+  const navigate = useNavigate();
   const { id, name, value, goal, limit } = data;
   const { state, updateCounters } = useContext(AppContext);
   const { list } = state;
   const limitIsExceed = limit ? value >= limit : false;
-  const [enableDeletion, setEnableDeletion] = useState(false);
 
-  function deleteListItem() {
-    if (!enableDeletion) {
-      setEnableDeletion(true);
-      return;
-    }
-
-    const updatedList = list.filter((listItem) => listItem.id !== id);
-    updateCounters(updatedList);
+  function goToEdit() {
+    navigate(`/edit-counter/${id}`);
   }
 
   function changeValue(newValue) {
@@ -116,7 +110,10 @@ const Counter = ({ className, data }) => {
 
   return (
     <Wrapper className={className}>
-      <Text>{name}</Text>
+      <Text onClick={goToEdit}>
+        {name}
+        <Edit type="AngleRight" />
+      </Text>
       <GoalWrapper>
         <GoalText value={value} goal={goal} limit={limit} />
         <IconButtonWrapper>
@@ -130,11 +127,6 @@ const Counter = ({ className, data }) => {
         </IconButtonWrapper>
       </GoalWrapper>
       <GoalProgress value={value} goal={goal} limit={limit} />
-      <ButtonWrapper>
-        <Button variation="error" onClick={deleteListItem}>
-          {enableDeletion ? 'Sure?' : 'Delete'}
-        </Button>
-      </ButtonWrapper>
     </Wrapper>
   );
 };
